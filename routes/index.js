@@ -69,6 +69,8 @@ function receivedMessage(event) {
             sendTextMessage(senderID, messageText);
         } else if (messageAttachments) {
             sendTextMessage(senderID, "Message with attachment received");
+        } else {
+            console.log('No message text');
         }
     });
 }
@@ -76,8 +78,7 @@ function receivedMessage(event) {
 function getUserProfil(userId, done) {
     request({
         uri: `https://graph.facebook.com/v2.6/${userId}?access_token=${process.env.PAGE_ACCESS_TOKEN}`,
-        method: 'POST',
-        json: messageData
+        method: 'GET'
     }, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             done(body);
