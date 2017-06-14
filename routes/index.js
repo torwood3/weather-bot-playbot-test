@@ -66,28 +66,15 @@ function receivedMessage(event) {
     getUserProfil(senderID, (userProfil, err) => {
         if(!err) return;
         if (messageText) {
-            console.log(userProfil);
-            // If we receive a text message, check to see if it matches a keyword
-            // and send back the example. Otherwise, just echo the text we received.
-            switch (messageText) {
-                case 'generic':
-                    sendGenericMessage(senderID);
-                    break;
-
-                default:
-                    sendTextMessage(senderID, messageText);
-            }
+            sendTextMessage(senderID, messageText);
         } else if (messageAttachments) {
             sendTextMessage(senderID, "Message with attachment received");
         }
     });
 }
 
-function sendGenericMessage(recipientId, messageText) {
-    // To be expanded in later sections
-}
-
 function getUserProfil(userId, done) {
+    return done({});
     request({
         uri: `https://graph.facebook.com/v2.6/${userId}?access_token=${process.env.PAGE_ACCESS_TOKEN}`,
         method: 'POST',
@@ -133,7 +120,7 @@ function sendTextMessage(recipientId, messageText) {
             id: recipientId
         },
         message: {
-            text: messageText
+            text: messageText + 'lol'
         }
     };
 
