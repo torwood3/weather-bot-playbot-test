@@ -63,27 +63,46 @@ function receivedMessage(event) {
     var messageText = message.text;
     var messageAttachments = message.attachments;
 
-    if (messageText) {
+    getUserProfil(senderID, (userProfil, err) => {
+        if(!err) return;
+        if (messageText) {
+            console.log(userProfil);
+            // If we receive a text message, check to see if it matches a keyword
+            // and send back the example. Otherwise, just echo the text we received.
+            switch (messageText) {
+                case 'generic':
+                    sendGenericMessage(senderID);
+                    break;
 
-        // If we receive a text message, check to see if it matches a keyword
-        // and send back the example. Otherwise, just echo the text we received.
-        switch (messageText) {
-            case 'generic':
-                sendGenericMessage(senderID);
-                break;
-
-            default:
-                sendTextMessage(senderID, messageText);
+                default:
+                    sendTextMessage(senderID, messageText);
+            }
+        } else if (messageAttachments) {
+            sendTextMessage(senderID, "Message with attachment received");
         }
-    } else if (messageAttachments) {
-        sendTextMessage(senderID, "Message with attachment received");
-    }
+    });
 }
 
 function sendGenericMessage(recipientId, messageText) {
     // To be expanded in later sections
 }
 
+function getUserProfil(userId, done) {
+    request({
+        uri: `https://graph.facebook.com/v2.6/${userId}?access_token=${process.env.PAGE_ACCESS_TOKEN}`,
+        method: 'POST',
+        json: messageData
+    }, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            done(body);
+        } else {
+            console.error("Unable to get user profil.");
+            console.error(response);
+            console.error(error);
+            done(null, error);
+        }
+    });
+}
 
 function callSendAPI(messageData) {
     console.log('callSendAPI');
