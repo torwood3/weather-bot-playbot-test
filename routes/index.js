@@ -64,7 +64,7 @@ function receivedMessage(event) {
     var messageAttachments = message.attachments;
 
     getUserProfil(senderID, (userProfil, err) => {
-        if(!err) return;
+        if(!err) console.log('No user Profil');
         if (messageText) {
             sendTextMessage(senderID, messageText);
         } else if (messageAttachments) {
@@ -74,7 +74,6 @@ function receivedMessage(event) {
 }
 
 function getUserProfil(userId, done) {
-    return done({});
     request({
         uri: `https://graph.facebook.com/v2.6/${userId}?access_token=${process.env.PAGE_ACCESS_TOKEN}`,
         method: 'POST',
