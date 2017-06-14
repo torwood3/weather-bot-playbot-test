@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var apiai = require('apiai');
+var nlpServer = apiai(process.env.APIAI_TOKEN);
+const uuid = require('node-uuid');
+var user = {};
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -63,8 +67,12 @@ function receivedMessage(event) {
     var messageText = message.text;
     var messageAttachments = message.attachments;
 
+    if(!user[senderID])
+        user[senderID] = uuid.v4();
+
     getUserProfil(senderID, (userProfil, err) => {
         if(!err) console.log('No user Profil');
+
         if (messageText) {
             sendTextMessage(senderID, messageText);
         } else if (messageAttachments) {
@@ -113,18 +121,40 @@ function callSendAPI(messageData) {
     });
 }
 
+function getResponse(messageText, senderID, done) {
+    var request = nlpServer.textRequest(messageText, {
+        sessionId: user[senderID]
+    });
+
+    request.on('response', function(response) {
+        console.log(response);
+        done("response of nlp")
+    });
+
+    request.on('error', function(error) {
+        console.log(error);
+        done(null, error);
+    });
+
+    request.end();
+}
+
 function sendTextMessage(recipientId, messageText) {
     console.log('sendTextMessage');
-    var messageData = {
-        recipient: {
-            id: recipientId
-        },
-        message: {
-            text: messageText + 'lol'
-        }
-    };
 
-    callSendAPI(messageData);
+    getResponse(messageText, recipientId, (responseText, err) => {
+        if(!err) return;
+
+        const messageData = {
+            recipient: {
+                id: recipientId
+            },
+            message: {
+                text: responseText
+            }
+        };
+        callSendAPI(messageData);
+    });
 }
 
 
