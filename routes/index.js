@@ -23,11 +23,11 @@ router.get('/webhook', function(req, res) {
 
 router.post('/weather', function(req, res, next) {
     const data = req.body;
-    /*const time = data.result.metadata.parameters.date;
-    const location = data.result.metadata.parameters.location;
-    const lang = data.result.lang;*/
+    const time = data.result.parameters.date;
+    const location = data.result.parameters.location;
+    const lang = data.lang;
 
-    console.log(data.result);
+    console.log(time);
 
     //Check if date is well formed
     //if date is now
