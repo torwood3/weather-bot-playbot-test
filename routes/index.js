@@ -39,7 +39,6 @@ router.post('/weather', function(req, res, next) {
         return res.sendStatus(400);
     }
     request(options, function (error, response, body) {
-        return res.sendStatus(200);
         if (!error && response.statusCode == 200) {
             console.log(body);
         } else {
@@ -47,6 +46,7 @@ router.post('/weather', function(req, res, next) {
             console.error(response);
             console.error(error);
         }
+        res.sendStatus(200);
     });
 });
 
