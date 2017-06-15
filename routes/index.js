@@ -44,9 +44,9 @@ router.post('/weather', function(req, res, next) {
             if (body.cnt >= diff) {
                 const result = body.list[diff];
                 res.json({
-                    "speech": `${result.weather[0].description} avec une température d'environ ${Math.floor(temp.day)}°C`,
+                    "speech": `${result.weather[0].description} avec une température d'environ ${Math.floor(result.temp.day)}°C`,
                     "source": "weather-api-playbots-test",
-                    "displayText": `${result.weather[0].description} avec une température d'environ ${Math.floor(temp.day)}°C`
+                    "displayText": `${result.weather[0].description} avec une température d'environ ${Math.floor(result.temp.day)}°C`
                 });
                 console.log(result);
             }
