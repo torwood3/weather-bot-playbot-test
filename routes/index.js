@@ -26,11 +26,12 @@ router.get('/webhook', function(req, res) {
 router.post('/weather', function(req, res, next) {
     const data = req.body;
     const time = moment(data.result.parameters.date,"YYYY-MM-DD");
+    const today = moment().format("YYYY-MM-DD");
     const location = data.result.parameters.location;
     const lang = data.lang;
 
-    const diff = moment().diff(time, 'days');
-    console.log(moment());
+    const diff = today.diff(time, 'days');
+    console.log(today);
     console.log(time);
     console.log(diff);
     let options = {method: 'GET'};
