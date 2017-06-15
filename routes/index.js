@@ -43,11 +43,14 @@ router.post('/weather', function(req, res, next) {
             body = JSON.parse(body);
             if (body.cnt >= diff) {
                 const result = body.list[diff];
-                res.json({
-                    "speech": `${result.weather[0].description} avec une température d'environ ${Math.floor(result.temp.day)}°C`,
-                    "source": "weather-api-playbots-test",
-                    "displayText": `${result.weather[0].description} avec une température d'environ ${Math.floor(result.temp.day)}°C`
-                });
+                if (result)
+                    res.json({
+                        "speech": `${result.weather[0].description} avec une température d'environ ${Math.floor(result.temp.day)}°C`,
+                        "source": "weather-api-playbots-test",
+                        "displayText": `${result.weather[0].description} avec une température d'environ ${Math.floor(result.temp.day)}°C`
+                    });
+                else
+                    res.sendStatus(400);
             }
         } else {
             console.error("Unable to get weather.");
