@@ -30,6 +30,9 @@ router.post('/weather', function(req, res, next) {
     const lang = data.lang;
 
     const diff = moment().diff(time, 'days');
+    console.log(moment());
+    console.log(time);
+    console.log(diff);
     let options = {method: 'GET'};
 
     if (diff => 0 && diff < 5 ) {
@@ -40,8 +43,7 @@ router.post('/weather', function(req, res, next) {
     }
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(body.cnt);
-            console.log(diff);
+            console.log(body["cnt"]);
             if (body.cnt >= diff) {
                 const result = body.list[diff];
                 console.log(result);
