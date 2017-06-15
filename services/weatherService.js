@@ -3,7 +3,7 @@ const moment = require('moment');
 
 const OPEN_WEATHER_MAP_API = process.env.OPEN_WEATHER_MAP_API;
 
-exports.WeatherService = class {
+class WeatherService {
     constructor(){}
 
     get(time, location, lang, done) {
@@ -41,3 +41,5 @@ exports.WeatherService = class {
         });
     }
 }
+
+module.exports = WeatherService;

@@ -6,7 +6,7 @@ const moment = require('moment');
 const MessengerBot = require('../bots/messengerBot');
 const WeatherService = require('../services/weatherService');
 
-const messagerBot = new MessengerBot();
+const messengerBot = new MessengerBot();
 const weatherService = new WeatherService();
 
 const FB_TOKEN = process.env.FB_TOKEN;
@@ -54,7 +54,7 @@ router.post('/webhook', function (req, res) {
             var timeOfEvent = entry.time;
             entry.messaging.forEach(function(event) {
                 if (event.message) {
-                    messagerBot.receivedMessage(event);
+                    messengerBot.receivedMessage(event);
                 } else {
                     console.log("Webhook received unknown event: ", event);
                 }

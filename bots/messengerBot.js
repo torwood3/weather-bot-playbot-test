@@ -5,7 +5,7 @@ const uuid = require('node-uuid');
 const APIAI_TOKEN = process.env.APIAI_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-exports.MessengerBot = class {
+class MessengerBot {
     constructor() {
         this.nlpServer = apiai(APIAI_TOKEN);
         this.userMap = new Map();
@@ -89,3 +89,5 @@ exports.MessengerBot = class {
         });
     }
 }
+
+module.exports = MessengerBot;
