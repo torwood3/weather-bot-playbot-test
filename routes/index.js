@@ -30,9 +30,6 @@ router.post('/weather', function(req, res, next) {
     const lang = data.lang;
 
     const diff = -1 * moment().diff(time, 'days');
-    console.log(moment());
-    console.log(time);
-    console.log(diff);
     let options = {method: 'GET'};
 
     if (diff => 0 && diff < 5 ) {
@@ -44,9 +41,13 @@ router.post('/weather', function(req, res, next) {
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             body = JSON.parse(body);
-            console.log(body["cnt"]);
             if (body.cnt >= diff) {
                 const result = body.list[diff];
+                res.json({
+                    "speech": `${result.weather[0].description} avec une température d'environ ${Math.floor(temp.day)}°C`,
+                    "source": "weather-api-playbots-test",
+                    "displayText": `${result.weather[0].description} avec une température d'environ ${Math.floor(temp.day)}°C`
+                });
                 console.log(result);
             }
         } else {
