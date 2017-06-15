@@ -3,8 +3,8 @@ var router = express.Router();
 
 const moment = require('moment');
 
-import {MessengerBot} from '../bots/messengerBot';
-import {WeatherService} from '../services/weatherService';
+const MessengerBot = require('../bots/messengerBot');
+const WeatherService = require('../services/weatherService');
 
 const messagerBot = new MessengerBot();
 const weatherService = new WeatherService();
