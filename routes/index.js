@@ -33,13 +33,17 @@ router.post('/weather', function(req, res, next) {
     let options = {method: 'GET'};
 
     if (diff => 0 && diff < 5 ) {
-        options.url = `http://api.openweathermap.org/data/2.5/forecast/daily?q=${location}&cnt=5&appid=${process.env.OPEN_WEATHER_MAP_API}`
+        options.url = `http://api.openweathermap.org/data/2.5/forecast/daily?q=${location}&cnt=5&units=metric&lang=fr&appid=${process.env.OPEN_WEATHER_MAP_API}`
     } else {
         console.log("la periode de temps n'est pas géré");
         return res.sendStatus(400);
     }
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
+            if (body.cnt == 5) {
+                const result = body.list[diff]
+                console.log(result);
+            }
             console.log(body);
         } else {
             console.error("Unable to get weather.");
