@@ -6,7 +6,6 @@ var nlpServer = apiai(process.env.APIAI_TOKEN);
 const uuid = require('node-uuid');
 var user = {};
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
@@ -21,6 +20,33 @@ router.get('/webhook', function(req, res) {
         res.sendStatus(403);
     }
 });
+
+router.post('/weather', function(req, res, next) {
+    const data = req.body;
+    const date = data.date;
+    const location = data.location;
+
+    console.log(data);
+    console.log(location)
+    //Check if date is well formed
+    //if date is now
+        //return
+    //else if date is less than now
+        //if less than 1months
+            //return
+        //else
+            //ERROR too old for a free account
+    //else
+        //if less than 5 day
+
+        //else if less than 16day
+
+        //else
+            //ERROR in too long time
+
+
+});
+
 
 router.post('/webhook', function (req, res) {
     var data = req.body;
@@ -156,6 +182,8 @@ function sendTextMessage(recipientId, messageText) {
         callSendAPI(messageData);
     });
 }
+
+
 
 
 module.exports = router;
