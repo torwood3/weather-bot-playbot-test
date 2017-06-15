@@ -29,7 +29,7 @@ router.post('/weather', function(req, res, next) {
     const location = data.result.parameters.location;
     const lang = data.lang;
 
-    const diff = moment().diff(time, 'days');
+    const diff = -1 * moment().diff(time, 'days');
     console.log(moment());
     console.log(time);
     console.log(diff);
