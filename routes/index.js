@@ -33,7 +33,7 @@ router.post('/weather', function(req, res, next) {
     let options = {method: 'GET'};
 
     if (diff => 0 && diff < 5 ) {
-        options.url = `api.openweathermap.org/data/2.5/forecast/daily?q=${location}&cnt=5&appid=${process.env.OPEN_WEATHER_MAP_API}`
+        options.url = `http://api.openweathermap.org/data/2.5/forecast/daily?q=${location}&cnt=5&appid=${process.env.OPEN_WEATHER_MAP_API}`
     } else {
         console.log("la periode de temps n'est pas géré");
         return res.sendStatus(400);
