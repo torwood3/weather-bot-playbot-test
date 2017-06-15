@@ -43,6 +43,7 @@ router.post('/weather', function(req, res, next) {
             body = JSON.parse(body);
             if (body.cnt >= diff) {
                 const result = body.list[diff];
+                console.log(result);
                 if (result)
                     res.json({
                         "speech": `${result.weather[0].description} avec une température d'environ ${Math.floor(result.temp.day)}°C`,
@@ -168,7 +169,8 @@ function getResponse(messageText, senderID, done) {
 
     request.on('response', function(response) {
         console.log(response);
-        done("response of nlp")
+        console.log('........... API RESPONSE .......');
+        done("response of nlp");
     });
 
     request.on('error', function(error) {
@@ -183,8 +185,7 @@ function sendTextMessage(recipientId, messageText) {
     console.log('sendTextMessage');
 
     getResponse(messageText, recipientId, (responseText, err) => {
-        if(!err) return;
-
+        if (err) console.log(err);
         const messageData = {
             recipient: {
                 id: recipientId
