@@ -40,11 +40,12 @@ router.post('/weather', function(req, res, next) {
     }
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            if (body.cnt == 5) {
-                const result = body.list[diff]
+            console.log(body.cnt);
+            console.log(diff);
+            if (body.cnt >= diff) {
+                const result = body.list[diff];
                 console.log(result);
             }
-            console.log(body);
         } else {
             console.error("Unable to get weather.");
             console.error(response);
