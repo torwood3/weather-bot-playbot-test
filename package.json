@@ -12,6 +12,8 @@
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "jade": "~1.11.0",
+    "moment": "^2.18.1",
+    "momentjs": "^2.0.0",
     "morgan": "~1.8.1",
     "node-sass-middleware": "0.9.8",
     "node-uuid": "^1.4.8",

@@ -2,9 +2,11 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var apiai = require('apiai');
-var nlpServer = apiai(process.env.APIAI_TOKEN);
 const uuid = require('node-uuid');
+const moment = require('moment');
+
 var user = {};
+var nlpServer = apiai(process.env.APIAI_TOKEN);
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -23,13 +25,11 @@ router.get('/webhook', function(req, res) {
 
 router.post('/weather', function(req, res, next) {
     const data = req.body;
-    const time = data.result.parameters.date;
+    const time = moment(data.result.parameters.date,"YYYY-MM-DD");
     const location = data.result.parameters.location;
     const lang = data.lang;
 
-    console.log(time);
-
-    //Check if date is well formed
+    console.log(moment().diff(time, 'days'));
     //if date is now
         //return
     //else if date is less than now
