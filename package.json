@@ -1,5 +1,5 @@
 {
-  "name": "playbots",
+  "name": "Weather Bot Backend for Messenger",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -8,16 +8,11 @@
   "dependencies": {
     "apiai": "^4.0.2",
     "body-parser": "~1.17.1",
-    "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
-    "jade": "~1.11.0",
     "moment": "^2.18.1",
-    "momentjs": "^2.0.0",
     "morgan": "~1.8.1",
-    "node-sass-middleware": "0.9.8",
     "node-uuid": "^1.4.8",
-    "request": "^2.81.0",
-    "serve-favicon": "~2.4.2"
+    "request": "^2.81.0"
   }
 }
