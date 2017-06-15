@@ -168,7 +168,9 @@ function getResponse(messageText, senderID, done) {
     });
 
     request.on('response', function(response) {
-        done(response.result.fulfillment.speach);
+        console.log('------------------- APIAI--------------');
+        console.log(response)
+        //done(response.result.fulfillment.speach);
     });
 
     request.on('error', function(error) {
