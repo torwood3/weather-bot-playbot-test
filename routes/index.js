@@ -29,23 +29,25 @@ router.post('/weather', function(req, res, next) {
     const location = data.result.parameters.location;
     const lang = data.lang;
 
-    console.log(moment().diff(time, 'days'));
-    //if date is now
-        //return
-    //else if date is less than now
-        //if less than 1months
-            //return
-        //else
-            //ERROR too old for a free account
-    //else
-        //if less than 5 day
+    const diff = moment().diff(time, 'days');
+    let options = {method: 'GET'};
 
-        //else if less than 16day
-
-        //else
-            //ERROR in too long time
-
-
+    if (diff => 0 && diff < 5 ) {
+        options.url = `api.openweathermap.org/data/2.5/forecast/daily?q=${location}&cnt=5&appid=${process.env.OPEN_WEATHER_MAP_API}`
+    } else {
+        console.log("la periode de temps n'est pas géré");
+        return res.sendStatus(400);
+    }
+    request(options, function (error, response, body) {
+        return res.sendStatus(200);
+        if (!error && response.statusCode == 200) {
+            console.log(body);
+        } else {
+            console.error("Unable to get weather.");
+            console.error(response);
+            console.error(error);
+        }
+    });
 });
 
 
