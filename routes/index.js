@@ -169,7 +169,7 @@ function getResponse(messageText, senderID, done) {
 
     request.on('response', function(response) {
         console.log('------------------- APIAI--------------');
-        console.log(response)
+        console.log(response.result.fulfillment.speech)
         //done(response.result.fulfillment.speach);
     });
 
