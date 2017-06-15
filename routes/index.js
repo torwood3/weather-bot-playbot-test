@@ -48,14 +48,13 @@ router.post('/weather', function(req, res, next) {
                     "source": "weather-api-playbots-test",
                     "displayText": `${result.weather[0].description} avec une température d'environ ${Math.floor(result.temp.day)}°C`
                 });
-                console.log(result);
             }
         } else {
             console.error("Unable to get weather.");
             console.error(response);
             console.error(error);
+            res.sendStatus(400);
         }
-        res.sendStatus(200);
     });
 });
 
