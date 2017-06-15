@@ -1,7 +1,7 @@
 {
-  "name": "Weather_Bot_Backend_for_Messenger",
+  "name": "Weather_Bot_Backend",
   "description": "Weather Bot Backend for Messenger based on API.AI, NodeJS and OpenWeatherMap ",
   "repository": "https://github.com/torwood3/weather-bot-playbot-test",
-  "logo": "",
+  "logo": "https://en.wikipedia.org/wiki/OpenWeatherMap#/media/File:OpenWeatherMap_logo.png",
   "keywords": ["weather bot", "chat bot", "api.ai"]
 }
